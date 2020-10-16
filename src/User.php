@@ -18,7 +18,7 @@ class User
     /**
      * Sanitize the given (partial) name of a person
      *
-     * - remove any html tags and characters above ASCII 127
+     * - removes all characters except a-zA-Z ,.'-
      * - re-capitalize, take last name inserts into account
      * - remove excess white spaces
      *
@@ -84,13 +84,30 @@ class User
      * @param string $email The input email
      * @return string The sanitized email
      */
-    public function sanitizeEmail(string $email)
+    public function sanitizeEmail(string $email): string
     {
         return filter_var($email, FILTER_SANITIZE_EMAIL);
     }
 
-    public function printMe()
+    /**
+     * Validates a given (partion) name of a person
+     * 
+     * @param string $name The input name
+     * @return bool
+     */
+    public function validateName(string $name): bool
     {
-        printf("%s %s, email: %s\n", $this->name, $this->surname, $this->email);
+        return preg_match("/^[a-zA-Z ,.\'-]+$/", $name);
+    }
+
+     /**
+     * Validates a given email
+     * 
+     * @param string $email The input email
+     * @return bool
+     */
+    public function validateEmail(string $email): bool
+    {
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 }
