@@ -42,7 +42,16 @@ class CsvToDatabaseInserter
                 continue;
             }
 
-            $users[] = new User($data[0], $data[1], $data[2]);
+            $user = new User($data[0], $data[1], $data[2]);
+            if (
+                $user->validateName($user->name) &&
+                $user->validateName($user->surname) &&
+                $user->validateEmail($user->email)
+            ) {
+                $users[] = $user;
+            } else {
+                var_dump($user);
+            }
         }
         fclose($file);
         $this->users = $users;
@@ -73,7 +82,7 @@ class CsvToDatabaseInserter
 
     public function insertUsers(PDO $dbh)
     {
-        if(!$this->createTable($dbh)){
+        if (!$this->createTable($dbh)) {
             echo 'Failed to create users table and can\'t insert users';
             exit();
         }

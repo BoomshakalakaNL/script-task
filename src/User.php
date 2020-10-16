@@ -79,6 +79,7 @@ class User
     /**
      * Sanitize the given email
      * 
+     * - characters are set to lowercase
      * - remove all characters except letters, digits and !#$%&'*+-=?^_`{|}~@.[]. 
      * 
      * @param string $email The input email
@@ -86,6 +87,7 @@ class User
      */
     public function sanitizeEmail(string $email): string
     {
+        $email = strtolower($email);
         return filter_var($email, FILTER_SANITIZE_EMAIL);
     }
 
