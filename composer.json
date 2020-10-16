@@ -1,0 +1,25 @@
+{
+    "name": "catalyst/script-task",
+    "description": "A PHP command line script that accepts a CSV file as input and processes the CSV file. The parsed data is then inserted into a MySQL database.",
+    "authors": [
+        {
+            "name": "Scott Verbeek",
+            "email": "srpverbeek@gmail.com",
+            "homepage": "https://github.com/BoomshakalakaNL",
+            "role": "Applicant"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "ScriptTask\\" : "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    }
+}
