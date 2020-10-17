@@ -76,7 +76,6 @@ class CsvToDatabaseInserterTest extends TestCase
 
     public function testCanInsertParsedUsersToDatabase()
     {
-        $this->csv2db->logger->isEnabled = true;
         $this->csv2db->setFile($this->file);
         $users = $this->csv2db->parseUsers();
         $this->csv2db->insertUsers();
