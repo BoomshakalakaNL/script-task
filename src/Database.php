@@ -35,8 +35,7 @@ class Database
             // If parameters $user or $pass are set use in connection
             return new PDO($dsn, ($user) ? $user : $db->user, ($pass) ? $pass : $db->pass);
         } catch (PDOException $e) {
-            echo 'Database connection failed: ' . $e->getMessage();
-            exit();
+            exit('Database connection failed: ' . $e->getMessage());
         }
     }
 }
