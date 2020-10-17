@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 require_once('vendor/autoload.php');
 
-use PHPUnit\Framework\Testcase;
+use PHPUnit\Framework\TestCase;
 use ScriptTask\Database;
 
-class DatabaseTest extends Testcase
+class DatabaseTest extends TestCase
 {
     public function testCanGetLink()
     {
