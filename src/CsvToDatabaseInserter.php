@@ -33,7 +33,7 @@ class CsvToDatabaseInserter
      *
      * @var Logger 
      */
-    private Logger $logger;
+    public Logger $logger;
 
     /**
      * PDO object for database interaction
@@ -188,7 +188,10 @@ class CsvToDatabaseInserter
                 if (!$sth->execute()) {
                     $error = $sth->errorInfo();
                     $this->logger->notice("Could not insert user $user->name,$user->surname,$user->email. DB error: " . $error[0] . " " . $error[2]);
+                } else {
+                    $this->logger->info("Sucessfully inserted user \"$user->name,$user->surname,$user->email\" into database");
                 }
+
             }
         } catch (PDOException $e) {
             $this->logger->error("PDO Exception: " . $e->getMessage());
