@@ -143,12 +143,8 @@ class CsvToDatabaseInserter
     public function createTable(): bool
     {
         try {
-            // Delete table if it exists
-            $sql = "DROP TABLE IF EXISTS users;";
-            $this->dbh->exec($sql);
-
             // Build table
-            $sql = "CREATE TABLE `users` ( 
+            $sql = "CREATE TABLE IF NOT EXISTS `users` ( 
                     `id` INT(11) NOT NULL AUTO_INCREMENT,
                     `name` VARCHAR(250) NOT NULL ,
                     `surname` VARCHAR(250) NOT NULL ,
@@ -164,8 +160,6 @@ class CsvToDatabaseInserter
             $this->logger->error("Exception: " . $e->getMessage());
             return false;
         }
-
-        $this->logger->info("Succesfully (re)built users table in database");
         return true;
     }
 
@@ -176,6 +170,10 @@ class CsvToDatabaseInserter
      */
     public function insertUsers(): void
     {
+        if(!$this->createTable()){
+            $this->logger->error("Could not create users table");
+            return;
+        }
         try {
             $sth = $this->dbh->prepare("INSERT INTO `users` (`name`, `surname`, `email`) VALUES (:name, :surname, :email)");
 
