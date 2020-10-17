@@ -11,6 +11,22 @@ namespace ScriptTask;
 class Logger
 {
     /**
+     * Property for disabling output
+     * 
+     * @var bool
+     */
+    public bool $isEnabled;
+
+    /**
+     * Construction of the class, takes boolean parameter $enabled,
+     * which has default value true. If false then logger won't print
+     */
+    public function __construct(bool $enabled = true)
+    {
+        $this->isEnabled = $enabled;
+    }
+
+    /**
      * Returns string that's the first part of the log and
      * contains date and time in format [DD/MM/YYYY HH:MM:SS]
      * 
@@ -29,7 +45,7 @@ class Logger
      */
     private function printLog(string $type, string $message)
     {
-        printf("%s [%s]: %s\n", $this->getDateTimeString(), $type, $message);
+        if($this->isEnabled) printf("%s [%s]: %s\n", $this->getDateTimeString(), $type, $message);
     }
 
     /**
