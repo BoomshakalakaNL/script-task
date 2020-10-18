@@ -25,7 +25,7 @@ $ composer install
 
 The script should be used like this
 ``` bash
-$ php user-upload.php [options] <filename>
+$ php user_upload.php [options] <filename>
 ```
 
 The script includes the following commands (directives):
@@ -42,7 +42,7 @@ The script includes the following commands (directives):
 ## Requirements
 
 * PHP version ^7.2.x
-* (Composer)[https://getcomposer.org/] version ^1.10.x
+* [Composer](https://getcomposer.org/) version ^1.10.x
 * MySQL database server version 5.7 or higher (MariaDB 10.x)
 * Database in MySQL named `catalyst-challenge` (if this differs then edit `config.ini`)
 
