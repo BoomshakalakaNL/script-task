@@ -100,14 +100,17 @@ class CsvToDatabaseInserter
         // Row Counter for logging purpose
         $row = 0;
         $users = [];
-
-        while (($data = fgetcsv($this->file)) !== FALSE) {
+        $field = array();
+        while (($data = fgetcsv($this->file)) !== false) {
             $row += 1;
             // Trim each element on row
             foreach ($data as &$item) $item = trim($item);
 
-            // If row matches field names, then skip it
-            if ($data == ['name', 'surname', 'email']) continue;
+            // If fields haven't been set, then set them with $data
+            if (empty($fields)) {
+                $fields = $data;
+                continue;
+            }
 
             // If the row is empty, then skip it
             if ($data == [""]) continue;
@@ -118,7 +121,13 @@ class CsvToDatabaseInserter
                 continue;
             }
 
-            $user = new User($data[0], $data[1], $data[2]);
+            // Store data into associate array using the $fields
+            $aaData = array();
+            foreach ($data as $key => $value) {
+                $aaData[$fields[$key]] = $value;
+            }
+
+            $user = new User($aaData['name'], $aaData['surname'], $aaData['email']);
             if (
                 $user->validateName($user->name) &&
                 $user->validateName($user->surname) &&
@@ -170,7 +179,7 @@ class CsvToDatabaseInserter
      */
     public function insertUsers(): void
     {
-        if(!$this->createTable()){
+        if (!$this->createTable()) {
             $this->logger->error("Could not create users table");
             return;
         }
@@ -189,7 +198,6 @@ class CsvToDatabaseInserter
                 } else {
                     $this->logger->info("Sucessfully inserted user \"$user->name,$user->surname,$user->email\" into database");
                 }
-
             }
         } catch (PDOException $e) {
             $this->logger->error("PDO Exception: " . $e->getMessage());
