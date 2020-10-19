@@ -53,3 +53,28 @@ The script includes the following commands (directives):
 ``` bash
 $ .\vendor\bin\phpunit --testdox tests
 ```
+
+---
+
+# Logic test
+
+`foobar.php` is a script taht outputs numbers from 1 to 100, and logs how long the script ran in seconds. It does this in the following way:
+ * Where the number is divisable by three (3) output is the word "foo" instead of the number.
+ * Where the number is divisable by five (5) output is the word "bar" instead of the number.
+ * Where the number is divisavle by three (3) and five (5) output the word "foobar".
+ * Otherwise just print the number.
+
+## Install
+
+Download `foobar.php` and paste it somewhere on your computer
+
+## Usage
+
+The script should be used like this
+``` bash
+$ php footbar.php
+```
+
+ ## Requirements
+
+* PHP version ^7.2.x
