@@ -1,6 +1,8 @@
 # script-task
 
-`script-task` is a PHP script, that is executed from the command line. It accepts a CSV file as input and processes the CSV file. The parsed file data is to be inserted into a MySQL database. A CSV file is provided `users.csv`, this contains test data, the script will process this file appropriately.
+`script-task` is a PHP script, that is executed from the command line. It accepts a CSV file as input and processes the CSV file. The parsed file data is to be inserted into a MySQL database. A CSV file is provided `users.csv`, this contains test data, the script will process this file appropriately. The script is based on the following class diagram:
+
+![alt text](./class-diagram.png)
 
 ## Goals
 
